@@ -1,0 +1,640 @@
+﻿@{
+    ViewData["Title"] = "Monitorizare temperatura IoT";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="dashboard-shell">
+    <section class="hero-panel">
+        <div class="hero-content">
+            <div class="ulbs-mark">ULBS</div>
+            <div>
+                <p class="eyebrow">FRDM-MCXN947 · ASP.NET Core MVC · SQLite</p>
+                <h1>Monitorizare inteligenta a temperaturii</h1>
+                <p class="hero-subtitle">
+                    Panou web cu actualizare automata, statistici pe intervale si prognoza estimativa pe baza masuratorilor colectate.
+                </p>
+                <div class="hero-meta">
+                    <span>Fondatori: <strong>Bunea Matei</strong> si <strong>Adiaconitei Andrei</strong></span>
+                    <span>Profesoara coordonatoare: <strong>Banciu Claudia</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-status" id="statusBox">
+            <span class="pulse-dot" id="statusDot"></span>
+            <span id="connectionStatus">Se conecteaza...</span>
+        </div>
+    </section>
+
+    <section class="top-grid">
+        <article class="metric-card primary-card">
+            <span class="metric-label">Temperatura curenta</span>
+            <div class="metric-value" id="latestTemperature">-- °C</div>
+            <span class="metric-hint" id="latestDevice">Astept date de la placa</span>
+        </article>
+
+        <article class="metric-card">
+            <span class="metric-label">Ultima actualizare</span>
+            <div class="metric-small" id="latestTime">--</div>
+            <span class="metric-hint">Pagina se actualizeaza la fiecare 2 secunde</span>
+        </article>
+
+        <article class="metric-card danger-card">
+    <span class="metric-label">Administrare date</span>
+    <div class="metric-small">Stergere istoric</div>
+
+    <button type="button" class="delete-button" onclick="deleteAllEntries()">
+        Sterge toate intrarile
+    </button>
+
+    <div class="delete-filter-box">
+        <label for="temperatureLimit">Stergere dupa temperatura</label>
+
+        <input id="temperatureLimit"
+               type="number"
+               step="0.1"
+               placeholder="Ex: 5 sau 40" />
+
+        <div class="delete-filter-actions">
+            <button type="button" class="delete-small-button" onclick="deleteByTemperature('greater')">
+                Sterge peste limita
+            </button>
+
+            <button type="button" class="delete-small-button secondary" onclick="deleteByTemperature('less')">
+                Sterge sub limita
+            </button>
+        </div>
+    </div>
+
+    <span class="metric-hint">Actiuni protejate cu parola</span>
+</article>
+    </section>
+
+    <section class="section-card">
+        <div class="section-header chart-header-flex">
+            <div>
+                <p class="eyebrow dark">Grafic temperatura</p>
+                <h2>Evolutia temperaturii pe zi si interval orar</h2>
+            </div>
+            <span class="method-badge">Chart.js · filtrare calendar</span>
+        </div>
+
+        <div class="chart-filter-panel">
+            <div class="chart-filter-main">
+                <label>
+                    Ziua analizata
+                    <input id="chartDate" type="date" />
+                </label>
+
+                <label>
+                    Ora inceput
+                    <input id="chartStartTime" type="time" value="00:00" />
+                </label>
+
+                <label>
+                    Ora final
+                    <input id="chartEndTime" type="time" value="23:59" />
+                </label>
+            </div>
+
+            <div class="chart-filter-actions">
+                <button type="button" class="ghost-button active-filter" id="allDayButton" onclick="setChartAllDay()">
+                    Toata ziua
+                </button>
+
+                <button type="button" class="ghost-button" onclick="loadChartData()">
+                    Afiseaza intervalul
+                </button>
+
+                <button type="button" class="ghost-button" onclick="setChartLastHour()">
+                    Ultima ora azi
+                </button>
+            </div>
+        </div>
+
+        <div class="chart-range-summary" id="chartRangeSummary">
+            Se incarca datele pentru ziua selectata...
+        </div>
+
+        <div class="chart-box">
+            <canvas id="temperatureChart" height="110"></canvas>
+        </div>
+    </section>
+
+    <section class="section-card">
+        <div class="section-header">
+            <div>
+                <p class="eyebrow dark">Statistici temperatura</p>
+                <h2>Medie, minim si maxim pe intervale</h2>
+            </div>
+            <button type="button" class="ghost-button" onclick="loadAllData()">Actualizeaza acum</button>
+        </div>
+
+        <div class="stats-grid" id="statsGrid">
+            <div class="loading-box">Se incarca statisticile...</div>
+        </div>
+    </section>
+
+    <section class="section-card forecast-section premium-forecast">
+        <div class="section-header">
+            <div>
+                <p class="eyebrow dark">Prognoza estimativa</p>
+                <h2>Prognoza temperaturii pe baza istoricului colectat</h2>
+            </div>
+            <span class="method-badge" id="forecastMethod">Regresie liniara</span>
+        </div>
+
+        <div class="forecast-summary" id="forecastSummary">
+            <div class="loading-box">Se calculeaza prognoza si localizarea...</div>
+        </div>
+
+        <div class="forecast-grid forecast-grid-large" id="forecastGrid">
+            <div class="loading-box">Se calculeaza prognoza...</div>
+        </div>
+
+        <p class="forecast-note" id="forecastWarning">
+            Estimarea foloseste regresie liniara simpla pe datele istorice colectate de placa.
+        </p>
+    </section>
+
+    <section class="section-card">
+        <div class="section-header">
+            <div>
+                <p class="eyebrow dark">Istoric masuratori</p>
+                <h2>Ultimele intrari primite de la placa</h2>
+            </div>
+            <span class="table-count" id="rowCount">0 intrari</span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>Device ID</th>
+                        <th>Temperatura</th>
+                        <th>Locatie</th>
+                        <th>AgeMs</th>
+                        <th>Data si ora</th>
+                    </tr>
+                </thead>
+                <tbody id="sensorTableBody">
+                    <tr>
+                        <td colspan="5" class="empty-cell">Se incarca datele...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script>
+    let temperatureChart = null;
+
+    function formatLocation(latitude, longitude) {
+        if (latitude === null || latitude === undefined || longitude === null || longitude === undefined) {
+            return '--';
+        }
+
+        return Number(latitude).toFixed(5) + ', ' + Number(longitude).toFixed(5);
+    }
+
+    function updateTemperatureChart(data, alreadyChronological = false) {
+        const canvas = document.getElementById('temperatureChart');
+
+        if (!canvas) {
+            return;
+        }
+
+        const chronological = alreadyChronological ? [...data] : [...data].reverse();
+        const labels = chronological.map(item => formatTimeOnly(item.timestamp));
+        const values = chronological.map(item => Number(item.temperature));
+
+        if (temperatureChart === null) {
+            temperatureChart = new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Temperatura °C',
+                        data: values,
+                        tension: 0.32,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true }
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Temperatura °C'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 0,
+                                autoSkip: true,
+                                maxTicksLimit: 8
+                            }
+                        }
+                    }
+                }
+            });
+        } else {
+            temperatureChart.data.labels = labels;
+            temperatureChart.data.datasets[0].data = values;
+            temperatureChart.update();
+        }
+    }
+
+    async function fetchJson(url, options) {
+        const response = await fetch(url, options);
+
+        if (!response.ok) {
+            let message = 'Eroare API';
+
+            try {
+                const errorBody = await response.json();
+                message = errorBody.message || message;
+            } catch (_) { }
+
+            throw new Error(message);
+        }
+
+        return await response.json();
+    }
+
+    function formatTemperature(value) {
+        if (value === null || value === undefined || Number.isNaN(Number(value))) {
+            return '--';
+        }
+
+        return Number(value).toFixed(1) + ' °C';
+    }
+
+    function formatDate(value) {
+        if (!value) {
+            return '--';
+        }
+
+        return new Date(value).toLocaleString('ro-RO');
+    }
+
+
+    function formatTimeOnly(value) {
+        if (!value) {
+            return '--';
+        }
+
+        return new Date(value).toLocaleTimeString('ro-RO', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+    }
+
+    function toLocalDateInputValue(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    function updateBoardStatus(latestTimestamp) {
+        const connectionStatus = document.getElementById('connectionStatus');
+        const statusBox = document.getElementById('statusBox');
+        const statusDot = document.getElementById('statusDot');
+
+        if (!latestTimestamp) {
+            connectionStatus.innerText = 'Nu exista date de la placa';
+            statusBox.className = 'hero-status status-warning-box';
+            statusDot.className = 'pulse-dot warning-dot';
+            return;
+        }
+
+        const latestDate = new Date(latestTimestamp);
+        const now = new Date();
+        const diffSeconds = (now - latestDate) / 1000;
+
+        if (diffSeconds <= 15) {
+            connectionStatus.innerText = 'Placa conectata - date in timp real';
+            statusBox.className = 'hero-status status-online-box';
+            statusDot.className = 'pulse-dot online-dot';
+        } else if (diffSeconds <= 60) {
+            connectionStatus.innerText = 'Placa posibil deconectata - nu au mai venit date recent';
+            statusBox.className = 'hero-status status-warning-box';
+            statusDot.className = 'pulse-dot warning-dot';
+        } else {
+            connectionStatus.innerText = 'Placa deconectata / fara date recente';
+            statusBox.className = 'hero-status status-offline-box';
+            statusDot.className = 'pulse-dot offline-dot';
+        }
+    }
+
+    function initializeChartFilters() {
+        const chartDate = document.getElementById('chartDate');
+
+        if (chartDate && !chartDate.value) {
+            chartDate.value = toLocalDateInputValue(new Date());
+        }
+    }
+
+    function setChartAllDay() {
+        document.getElementById('chartStartTime').value = '00:00';
+        document.getElementById('chartEndTime').value = '23:59';
+        loadChartData();
+    }
+
+    function setChartLastHour() {
+        const now = new Date();
+        const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+
+        document.getElementById('chartDate').value = toLocalDateInputValue(now);
+        document.getElementById('chartStartTime').value = oneHourAgo.toTimeString().slice(0, 5);
+        document.getElementById('chartEndTime').value = now.toTimeString().slice(0, 5);
+
+        loadChartData();
+    }
+
+    async function loadChartData() {
+        initializeChartFilters();
+
+        const selectedDate = document.getElementById('chartDate').value;
+        const startTime = document.getElementById('chartStartTime').value || '00:00';
+        const endTime = document.getElementById('chartEndTime').value || '23:59';
+        const summary = document.getElementById('chartRangeSummary');
+
+        const url = `/api/data/range?date=${encodeURIComponent(selectedDate)}&startTime=${encodeURIComponent(startTime)}&endTime=${encodeURIComponent(endTime)}&take=20000`;
+        const result = await fetchJson(url);
+
+        updateTemperatureChart(result.items, true);
+
+        summary.innerHTML = `
+            <div class="range-summary-grid">
+                <span><strong>${result.count}</strong> citiri</span>
+                <span>Interval: <strong>${startTime} - ${endTime}</strong></span>
+                <span>Medie: <strong>${formatTemperature(result.average)}</strong></span>
+                <span>Minim: <strong>${formatTemperature(result.minimum)}</strong></span>
+                <span>Maxim: <strong>${formatTemperature(result.maximum)}</strong></span>
+            </div>
+        `;
+    }
+
+    async function loadSensorData() {
+        const data = await fetchJson('/api/data?take=500');
+
+        const tableBody = document.getElementById('sensorTableBody');
+        const latestTemperature = document.getElementById('latestTemperature');
+        const latestTime = document.getElementById('latestTime');
+        const latestDevice = document.getElementById('latestDevice');
+        const rowCount = document.getElementById('rowCount');
+
+        tableBody.innerHTML = '';
+        rowCount.innerText = data.length + (data.length === 1 ? ' intrare' : ' intrari');
+
+        if (data.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="5" class="empty-cell">Baza de date este goala.</td></tr>';
+            latestTemperature.innerText = '-- °C';
+            latestTime.innerText = '--';
+            latestDevice.innerText = 'Astept date de la placa';
+            updateBoardStatus(null);
+            return;
+        }
+
+        const latest = data[0];
+
+        latestTemperature.innerText = formatTemperature(latest.temperature);
+        latestTime.innerText = formatDate(latest.timestamp);
+        latestDevice.innerText = latest.deviceId || 'FRDM-MCXN947';
+
+        updateBoardStatus(latest.timestamp);
+
+        data.forEach(item => {
+            const row = `
+                <tr>
+                    <td><span class="device-pill">${item.deviceId || 'FRDM-MCXN947'}</span></td>
+                    <td><strong>${formatTemperature(item.temperature)}</strong></td>
+                    <td>${formatLocation(item.latitude, item.longitude)}</td>
+                    <td>${item.ageMs ?? 0}</td>
+                    <td>${formatDate(item.timestamp)}</td>
+                </tr>
+            `;
+
+            tableBody.innerHTML += row;
+        });
+    }
+
+    async function loadStatistics() {
+        const stats = await fetchJson('/api/data/statistics');
+        const statsGrid = document.getElementById('statsGrid');
+
+        statsGrid.innerHTML = '';
+
+        stats.forEach(item => {
+            const card = `
+                <article class="stat-card">
+                    <div class="stat-title">${item.label}</div>
+                    <div class="stat-count">${item.count} citiri</div>
+                    <div class="stat-values">
+                        <span><small>Medie</small><strong>${formatTemperature(item.average)}</strong></span>
+                        <span><small>Minim</small><strong>${formatTemperature(item.minimum)}</strong></span>
+                        <span><small>Maxim</small><strong>${formatTemperature(item.maximum)}</strong></span>
+                    </div>
+                </article>
+            `;
+
+            statsGrid.innerHTML += card;
+        });
+    }
+
+    async function loadForecast() {
+        const forecastResponse = await fetchJson('/api/data/forecast?take=4000');
+
+        const forecastGrid = document.getElementById('forecastGrid');
+        const forecastMethod = document.getElementById('forecastMethod');
+        const forecastSummary = document.getElementById('forecastSummary');
+        const forecastWarning = document.getElementById('forecastWarning');
+
+        forecastGrid.innerHTML = '';
+
+        if (!forecastResponse.available) {
+            forecastGrid.innerHTML = `<div class="loading-box">${forecastResponse.message}</div>`;
+            forecastSummary.innerHTML = '';
+            forecastMethod.innerText = 'Date insuficiente';
+            return;
+        }
+
+        forecastMethod.innerText = `${forecastResponse.method} · ${forecastResponse.samples} citiri analizate`;
+
+        forecastSummary.innerHTML = `
+            <div class="forecast-summary-grid">
+                <article class="summary-pill">
+                    <small>Localitate estimata</small>
+                    <strong>${forecastResponse.location.locality}</strong>
+                </article>
+
+                <article class="summary-pill">
+                    <small>Coordonate</small>
+                    <strong>${forecastResponse.location.latitude}, ${forecastResponse.location.longitude}</strong>
+                </article>
+
+                <article class="summary-pill">
+                    <small>Ultima temperatura</small>
+                    <strong>${formatTemperature(forecastResponse.lastTemperature)}</strong>
+                </article>
+
+                <article class="summary-pill">
+                    <small>Trend estimat</small>
+                    <strong>${Number(forecastResponse.trendPerDay).toFixed(3)} °C / zi</strong>
+                </article>
+
+                <article class="summary-pill">
+                    <small>Interval analizat</small>
+                    <strong>${forecastResponse.observedHours} ore</strong>
+                </article>
+
+                <article class="summary-pill">
+                    <small>Incredere</small>
+                    <strong>${forecastResponse.confidence}</strong>
+                </article>
+            </div>
+        `;
+
+        forecastResponse.forecast.forEach(item => {
+            const card = `
+                <article class="forecast-card forecast-card-premium">
+                    <div class="forecast-topline">
+                        <span class="forecast-period">${item.label}</span>
+                        <span class="forecast-confidence">${item.confidence}</span>
+                    </div>
+
+                    <div class="forecast-main">${formatTemperature(item.predictedAverage)}</div>
+
+                    <div class="forecast-range premium-range">
+                        <span>Minim estimat: <strong>${formatTemperature(item.predictedMinimum)}</strong></span>
+                        <span>Maxim estimat: <strong>${formatTemperature(item.predictedMaximum)}</strong></span>
+                    </div>
+
+                    <div class="trend-line">
+                        Trend folosit: ${Number(item.trendPerDay).toFixed(3)} °C / zi
+                    </div>
+                </article>
+            `;
+
+            forecastGrid.innerHTML += card;
+        });
+
+        forecastWarning.innerText = forecastResponse.warning;
+    }
+
+    async function loadAllData() {
+        try {
+            initializeChartFilters();
+
+            await Promise.all([
+                loadSensorData(),
+                loadStatistics(),
+                loadForecast(),
+                loadChartData()
+            ]);
+        } catch (error) {
+            const connectionStatus = document.getElementById('connectionStatus');
+            const statusBox = document.getElementById('statusBox');
+            const statusDot = document.getElementById('statusDot');
+
+            connectionStatus.innerText = 'Eroare conexiune API';
+            statusBox.className = 'hero-status status-offline-box';
+            statusDot.className = 'pulse-dot offline-dot';
+
+            console.error(error);
+        }
+    }
+
+    async function deleteAllEntries() {
+        const password = prompt('Introdu parola pentru stergerea tuturor intrarilor:');
+
+        if (!password) {
+            return;
+        }
+
+        const confirmed = confirm('Confirmi stergerea tuturor intrarilor din baza de date?');
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+            const result = await fetchJson('/api/data/delete-all', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ password: password })
+            });
+
+            alert(result.message + ' Intrari sterse: ' + result.deletedCount);
+            await loadAllData();
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+
+    async function deleteByTemperature(mode) {
+    const input = document.getElementById('temperatureLimit');
+    const value = Number(input.value);
+
+    if (Number.isNaN(value)) {
+        alert('Introdu o valoare valida pentru temperatura.');
+        return;
+    }
+
+    const password = prompt('Introdu parola pentru stergere:');
+
+    if (!password) {
+        return;
+    }
+
+    const modeText = mode === 'greater'
+        ? `mai mari decat ${value} °C`
+        : `mai mici decat ${value} °C`;
+
+    const confirmed = confirm(`Confirmi stergerea tuturor intrarilor cu temperatura ${modeText}?`);
+
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+        const result = await fetchJson('/api/data/delete-by-temperature', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                password: password,
+                temperatureLimit: value,
+                mode: mode
+            })
+        });
+
+        alert(result.message + ' Intrari sterse: ' + result.deletedCount);
+        await loadAllData();
+
+    } catch (error) {
+        alert(error.message);
+    }
+}
+
+    initializeChartFilters();
+
+    document.getElementById('chartDate')?.addEventListener('change', loadChartData);
+    document.getElementById('chartStartTime')?.addEventListener('change', loadChartData);
+    document.getElementById('chartEndTime')?.addEventListener('change', loadChartData);
+
+    loadAllData();
+    setInterval(loadAllData, 5000);
+</script>

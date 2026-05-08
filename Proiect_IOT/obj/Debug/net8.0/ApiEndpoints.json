@@ -1,0 +1,153 @@
+[
+  {
+    "ContainingType": "Proiect_IOT.Controllers.DataController",
+    "Method": "GetData",
+    "RelativePath": "api/Data",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "take",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proiect_IOT.Controllers.DataController",
+    "Method": "PostData",
+    "RelativePath": "api/Data",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "incomingData",
+        "Type": "Proiect_IOT.Controllers.DataController\u002BSensorDataRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proiect_IOT.Controllers.DataController",
+    "Method": "DeleteAll",
+    "RelativePath": "api/Data/delete-all",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Proiect_IOT.Controllers.DataController\u002BDeleteAllRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proiect_IOT.Controllers.DataController",
+    "Method": "DeleteByTemperature",
+    "RelativePath": "api/Data/delete-by-temperature",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Proiect_IOT.Controllers.DataController\u002BDeleteByTemperatureRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proiect_IOT.Controllers.DataController",
+    "Method": "GetForecast",
+    "RelativePath": "api/Data/forecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "take",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proiect_IOT.Controllers.DataController",
+    "Method": "GetLatest",
+    "RelativePath": "api/Data/latest",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proiect_IOT.Controllers.DataController",
+    "Method": "LinearRegressionFromPredefinedData",
+    "RelativePath": "api/Data/linear-regression",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proiect_IOT.Controllers.DataController",
+    "Method": "Ping",
+    "RelativePath": "api/Data/ping",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proiect_IOT.Controllers.DataController",
+    "Method": "GetRange",
+    "RelativePath": "api/Data/range",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "date",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "startTime",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "endTime",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "take",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proiect_IOT.Controllers.DataController",
+    "Method": "GetStatistics",
+    "RelativePath": "api/Data/statistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

@@ -1,0 +1,12 @@
+# Eclipse/MCUXpresso IDE project settings                                                                                                                                                                                                                                           
+.settings/                                                                                                                                                                                                                                                                        
+.project                                                                                                                                                                                                                                                                            
+.cproject                                                                                                                                                                                                                                                                           
+
+# Build output
+Debug/
+Release/
+build/
+
+# MCUXpresso specific
+*.launch

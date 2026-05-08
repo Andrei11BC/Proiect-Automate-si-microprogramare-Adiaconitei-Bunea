@@ -1,0 +1,184 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|d:\\anul4\\sem2\\florea\\proiect baza de date iot\\proiect_iot\\controllers\\datacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|solutionrelative:controllers\\datacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|d:\\anul4\\sem2\\florea\\proiect baza de date iot\\proiect_iot\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|d:\\anul4\\sem2\\florea\\proiect baza de date iot\\proiect_iot\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|solutionrelative:wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|d:\\anul4\\sem2\\florea\\proiect baza de date iot\\proiect_iot\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|d:\\anul4\\sem2\\florea\\proiect baza de date iot\\proiect_iot\\models\\sensordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|solutionrelative:models\\sensordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|d:\\anul4\\sem2\\florea\\proiect baza de date iot\\proiect_iot\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|d:\\anul4\\sem2\\florea\\proiect baza de date iot\\proiect_iot\\migrations\\20260423161709_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|solutionrelative:migrations\\20260423161709_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|d:\\anul4\\sem2\\florea\\proiect baza de date iot\\proiect_iot\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|d:\\anul4\\sem2\\florea\\proiect baza de date iot\\proiect_iot\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|d:\\anul4\\sem2\\florea\\proiect baza de date iot\\proiect_iot\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8FB9F971-C1B8-4312-8042-10AEEB7B1114}|Proiect_IOT.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "site.css",
+              "DocumentMoniker": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\site.css",
+              "ToolTip": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "wwwroot\\css\\site.css",
+              "ViewState": "AgIAAPECAAAAAAAAAAAAABoDAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-05-02T08:03:48.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T17:29:54.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAFcCAAAAAAAAAAAYwH8CAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-23T17:05:01.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DataController.cs",
+              "DocumentMoniker": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Controllers\\DataController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DataController.cs",
+              "ToolTip": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Controllers\\DataController.cs",
+              "RelativeToolTip": "Controllers\\DataController.cs",
+              "ViewState": "AgIAAJ8CAAAAAAAAAAA1wMcCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T16:17:51.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "20260423161709_InitialCreate.cs",
+              "DocumentMoniker": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Migrations\\20260423161709_InitialCreate.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260423161709_InitialCreate.cs",
+              "ToolTip": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Migrations\\20260423161709_InitialCreate.cs",
+              "RelativeToolTip": "Migrations\\20260423161709_InitialCreate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T16:17:09.543Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T16:15:10.857Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T16:14:33.357Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SensorData.cs",
+              "DocumentMoniker": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Models\\SensorData.cs",
+              "RelativeDocumentMoniker": "Models\\SensorData.cs",
+              "ToolTip": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Models\\SensorData.cs",
+              "RelativeToolTip": "Models\\SensorData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T16:13:40.95Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-23T16:12:28.849Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "D:\\Anul4\\sem2\\Florea\\PROIECT BAZA DE DATE IOT\\Proiect_IOT\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-23T16:34:52.063Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
